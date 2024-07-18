@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Website Layout</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+		}
+		header {
+			padding: 20px 0;
+			height: 170px;
+			text-align: center;
+		}
+		nav {
+			height: 25px;
+			padding: 0px 0px;
+			display: flex;
+			align-items: right;
+			/* align : right; */
+			box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+		}
+		nav a {
+			color: #333;
+			text-decoration: none;
+			margin: 0 10px;
+			padding: 0px;
+			border-radius: 5px;
+			transition: background-color 0.3s ease;
+			align-items: right;
+			font-family: 'Poppins';
+			font-style: normal;
+			font-weight: 400;
+			font-size: 20px;
+
+		}
+		nav a:hover {
+			background-color: #E5E5E5;
+
+
+		}
+		main {
+			padding: 20px;
+			background-color: #F2F2F2;
+			min-height: 500px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+		}
+		footer {
+			background-color: #228B22;
+			color: white;
+			text-align: center;
+			padding: 10px 0;
+			margin-top: 20px;
+		}
+
+		h1{
+			margin: 0;
+			font-family: 'Lexend Peta';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 100px;
+            padding: 30px 20px;
+
+		}
+		h2{
+			margin: 0;
+			font-family: 'Plus Jakarta Sans';
+			font-style: normal;
+			font-weight: 400;
+			font-size: 40px;
+			line-height: 50px;
+			text-align: center;
+			padding: 0px 20px;
+		}
+
+		.hel{
+			font-family: 'Plus Jakarta Sans';
+			font-style: normal;
+			font-weight: 400;
+			font-size: 40px;
+			line-height: 50px;
+			text-align: center;
+			padding: 0px 20px;
+		}
+
+
+	</style>
+</head>
+<body>
+	<header>
+		<h1>HARVEST</h1>
+	</header>
+	<nav>
+		<a href="/home2">Home</a>
+	</nav>
+	<main>
+		<h1>Crop and Fertilizer Output</h1>
+
+    <div id="cropOutput">
+        <h2>Crop Output: {{ crop_output }}</h2>
+    </div>
+
+    <div id="fertilizerOutput">
+        <h2>Fertilizer Output: {{ fertilizer_output }}</h2>
+    </div>
+	</main>
+
+	<footer>
+		<p>&copy; 2023 Our Website. All rights reserved.</p>
+	</footer>
+</body>
+</html>

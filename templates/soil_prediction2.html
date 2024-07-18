@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Website Layout</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+		}
+		header {
+			padding: 20px 0;
+			height: 170px;
+			text-align: center;
+		}
+		nav {
+			height: 25px;
+			padding: 0px 0px;
+			display: flex;
+			align-items: right;
+			align : right;
+			box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+		}
+		nav a {
+			color: #333;
+			text-decoration: none;
+			margin: 0 10px;
+			padding: 0px;
+			border-radius: 5px;
+			transition: background-color 0.3s ease;
+			align-items: right;
+			font-family: 'Poppins';
+			font-style: normal;
+			font-weight: 400;
+			font-size: 20px;
+
+		}
+		nav a:hover {
+			background-color: #E5E5E5;
+
+
+		}
+		main {
+			padding: 20px;
+			background-color: #F2F2F2;
+			min-height: 500px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+		}
+		footer {
+			background-color: #228B22;
+			color: white;
+			text-align: center;
+			padding: 10px 0;
+			margin-top: 20px;
+		}
+
+		h1{
+			margin: 0;
+			font-family: 'Lexend Peta';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 100px;
+            padding: 30px 20px;
+
+		}
+		h2{
+			margin: 0;
+			font-family: 'Plus Jakarta Sans';
+			font-style: normal;
+			font-weight: 400;
+			font-size: 40px;
+			line-height: 50px;
+			text-align: center;
+			padding: 0px 20px;
+		}
+
+	</style>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+			background-color: #f0f0f0;
+		}
+
+		.container {
+			max-width: 600px;
+			margin: 50px auto;
+			padding: 20px;
+			background-color: #fff;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+			border-radius: 5px;
+		}
+
+		h1 {
+			text-align: center;
+			margin-bottom: 30px;
+		}
+
+		label {
+			display: block;
+			margin-bottom: 10px;
+		}
+
+		input[type="text"],
+		input[type="number"],
+		select {
+			width: 100%;
+			padding: 10px;
+			border: 1px solid #ddd;
+			border-radius: 5px;
+			box-sizing: border-box;
+			margin-bottom: 20px;
+		}
+		locdis{
+			width: 50%;
+			padding: 10px;
+			border: 1px solid #ddd;
+			border-radius: 5px;
+			box-sizing: border-box;
+			margin-bottom: 20px;
+			height: 100px;
+		}
+
+		textarea {
+			width: 100%;
+			padding: 10px;
+			border: 1px solid #ddd;
+			border-radius: 5px;
+			box-sizing: border-box;
+			margin-bottom: 20px;
+			height: 100px;
+		}
+
+		.button2 {
+			background-color: #2E86C1;
+			color: #fff;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			display: block;
+			margin: 0 auto;
+		}
+
+		.button2:hover {
+			background-color: #1A64B2;
+		}
+		loc {
+			background-color: #E5E5E5;
+			color: #fff;
+			padding: 20px 20px;
+			border: 20px;
+			border-radius: 5px;
+			cursor: pointer;
+			display: block;
+			margin: 0 auto;
+
+		}
+
+		loc:hover {
+			background-color: #1A64B2;
+		}
+		#displayBox {
+    width: 200px;
+    height: 30px;
+    padding: 5px;
+    margin-bottom: 10px;
+	}
+	</style>
+	<script>
+    $(document).ready(function(){
+        $('#getLocationButton').click(function(){
+            // Ask for permission to access user's location
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    // Send coordinates to Flask
+                    $.ajax({
+                        url: '/get_location',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            latitude: position.coords.latitude,
+                            longitude: position.coords.longitude
+                        }),
+                        success: function(data) {
+
+                            var temperature = data.temperature;
+                            var temperatureInput = document.getElementById("temperature");
+                            temperatureInput.value = temperature;
+
+                            var location = position.coords.latitude + " " + position.coords.longitude;
+                            var locationInput = document.getElementById("displayBox");
+                            locationInput.value = location;
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('Error:', error);
+                        }
+                    });
+                });
+            }
+        });
+    });
+</script>
+
+</head>
+<body>
+
+	<header>
+		<h1>HARVEST</h1>
+    </header>
+	<nav>
+		<a href="/home2">Home</a>
+		<a href="/about2">About Group</a>
+	</nav>
+	<div class="container">
+		<h1>Data Entry Form</h1>
+
+		<form id="dataEntryForm" method="POST" action="/submit_form">
+			<label >Location access:</label>
+			<input type="text" id="displayBox" readonly>
+    		<button id="getLocationButton">find me</button>
+
+			<label for="soilColor">Soil Color:</label>
+			<select id="soilColor" name="soilColor" required>
+				<option value="">Select a Soil Color</option> <option value="0">Black</option> <option value="5">Red</option> <option value="1">Dark Brown</option> <option value="3">Medium Brown</option> <option value="2">Light Brown</option> <option value="4">Reddish Brown</option>  </select><br>
+
+			<label for="nitrogen">Nitrogen:</label>
+			<input type="number" id="nitrogen" name="nitrogen" step="0.1" required><br>
+
+			<label for="phosphorus">Phosphorus:</label>
+			<input type="number" id="phosphorus" name="phosphorus" step="0.1" required><br>
+
+			<label for="potassium">Potassium:</label>
+			<input type="number" id="potassium" name="potassium" step="0.1" required><br>
+
+			<label for="water">Water:</label>
+			<select id="water" name="water"  required>
+				<option value="">Select water availability</option> <option value="1700">High</option> <option value="1000">Moderate</option> <option value="500">Low</option> </select><br>
+
+			<label for="temperature">Temperature:</label>
+			<input type="number" id="temperature" name="temperature" value="{{ default_temperature }}" step="0.1" required><br>
+
+			<button type="submit" class="button2">Submit</button>
+
+		</form>
+	</div>
+	<footer>
+		<p>&copy; 2023 Our Website. All rights reserved.</p>
+	</footer>
+</body>
+</html>
